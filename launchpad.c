@@ -383,10 +383,10 @@ static int launchpad_init(char *path)
     setVal(sec, "Encoding", 's', &encoding);
     if(setVal(sec, "FontHeight", 'i', &lps->fontheight)) lps->fontheight=16;
     if(setVal(sec, "FontWidth", 'i', &lps->fontwidth)) lps->fontwidth=8;
+    if(setVal(sec, "XOffset", 'i', &lps->xofs)) lps->xofs=0;
     if(setVal(sec, "YOffset", 'i', &lps->yofs)) lps->yofs=40;
     if(setVal(sec, "ScrollbackLines", 'i', &lps->sb_lines)) lps->sb_lines=0;
     lps->sb_pos=0;
-    lps->xofs = 0;
     
 
 	/* try open files so we know on what system we are */
@@ -973,7 +973,7 @@ struct terminal *shell_find(const char *name)
 	}
 	strcpy(t->name, name);
 	t->the_shell = term_new("/bin/sh", t->name, (lps->fb->pixmap.height-2*lps->yofs)/lps->fontheight, 
-            (lps->fb->pixmap.width-lps->xofs)/lps->fontwidth, lps->sb_lines, term_dead);
+            (lps->fb->pixmap.width-2*lps->xofs)/lps->fontwidth, lps->sb_lines, term_dead);
     lps->sb_step = (lps->fb->pixmap.height-2*lps->yofs)/lps->fontheight/2;
 	if (!t->the_shell) {
 		free(t);
