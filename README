@@ -1,0 +1,51 @@
+myts -- A kindle based terminal
+Matan Ziv-Av (matan@svgalib.org)
+
+A terminal for the kindle, which uses the two parts above,
+and simple framebuffer routines, to run a full terminal.
+
+To use the program, you should have launchpad installed.
+
+Shift T T opens terminal 1, or returns to it if already open.
+Shift T Y opens terminal 2, or returns to it if already open.
+Shift T U opens terminal 3, or returns to it if already open.
+Shift T A kills myts
+
+
+To exit from a terminal press "Left<" (page back on the
+top left ; this is configurable).
+
+The keyboard is mapped as follows:
+
+
+Menu:
+F1 F2 F3 F4 F5 F6 F7 F8 F9  F10
+`  %  ^  <  >  [  ]  =  F11 F12
+\t ;  ,  (  )  {  }
+   
+   
+Back:
+!  @  #  $  %  ^  &  *  (   )
+'  +  #  -  _  (  )  &  !   ?
+~  $  |  /  \  "  '  :
+
+The mapping of the Symbols keyboard (Back), can be configured
+by the option Symbols in myts.ini.
+
+The terminal supports UTF8 by using Encoding = UTF8 in the 
+config file. Only the first 4096 characters of the font are used 
+in this case.
+New 8bit encodings can be created by the script codepage.sh in the
+source, or by adding the encoding name (iconv format) in the 
+CODEPAGES variable in the Makefile.
+
+This program is based on kiterm by Luigi Rizzo, with 
+work by mobileread users PoP, Xqtftqx and dsmid.
+
+The regular font is GNU unifont (with characters of width 16 removed)
+and the bold font is the 8x13B font from
+http://www.cl.cam.ac.uk/~mgk25/ucs-fonts.html
+Fonts can be converted from bdf to hex format by the
+included perl script bdf2hex.
+Maximum supported font width is 8. Font width and height must be
+configured in myts.ini.
