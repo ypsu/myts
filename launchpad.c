@@ -564,6 +564,7 @@ static void process_term(struct input_event *ev, int mode)
 	static int lang = 0;
 	static int langlock = 0;
 	static int home = 0;
+	(void) home;
     static int help = 0;
 
 	DBG(1, "process event %d %d e %p %.*s for terminal\n",
@@ -860,6 +861,7 @@ void print_keymap() {
 static void process_event(struct input_event *ev, int mode)
 {
 	static int npressed = 0 ;	/* keys currently pressed */
+	(void) npressed;
 
     if (mode == -3) { /* Special event */
         char *buf = (char *)ev;

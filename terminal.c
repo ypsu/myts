@@ -261,6 +261,7 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 {
 	/* see http://en.wikipedia.org/wiki/ANSI_escape_code */
 	char *x, *parm, *base = *s + 2, cmd, mark=' ';
+	(void) x;
 	int n;
 	int a1= 1, a2= 1, a3 = 1;
 
