@@ -1,8 +1,10 @@
 # $Id: Makefile 8169 2011-01-07 17:32:36Z luigi $
 
 #CC=arm-linux-gnueabi-gcc
-CC=/opt/toolchains/arm-2009q3/bin/arm-none-linux-gnueabi-gcc
-STRIP=arm-linux-gnueabi-strip
+#CC=/opt/toolchains/arm-2009q3/bin/arm-none-linux-gnueabi-gcc
+CC=gcc
+#STRIP=arm-linux-gnueabi-strip
+STRIP=strip
 CFLAGS = -Os -Wall -Werror 
 # files to publish
 PUB= $(HEADERS) $(ALLSRCS) Makefile README myts.arm myts.ini keydefs.ini $(TABLES)
