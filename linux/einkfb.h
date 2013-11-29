@@ -108,8 +108,8 @@ typedef enum splash_screen_type splash_screen_type;
 
 struct power_override_t
 {
-    u_int   cmd;
-    u_long  arg;
+    unsigned int   cmd;
+    unsigned long  arg;
 };
 typedef struct power_override_t power_override_t;
 
