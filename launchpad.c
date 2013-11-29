@@ -748,6 +748,7 @@ static void print_buf(int x0, int y0, int cols, int cur,
             bg = (bg & 0x38) >> 2; /* background color */
 
             bg = bg | (bg << 4);
+            bg &= 0x77;
             if ( i == cur )
                 bg |= 0x88;
             get_char_pixmap(lps->fb->font, cc, &char_pixmap) ;
