@@ -74,7 +74,7 @@ int init_font(const char *cp, const char *font, int fontheight, int fontwidth) {
     }
 
     fontf=fopen(font,"r");
-    if(fontf<0) return -2;
+    if(fontf==0) return -2;
     quadbits=malloc(1024);
     calcquadbits();
     charsdone=0;
