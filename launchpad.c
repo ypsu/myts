@@ -1124,7 +1124,7 @@ int launchpad_parse(int *ac, char *av[])
 
 int launchpad_start(void)
 {
-	new_sess(0, -2, handle_launchpad, NULL);
+	new_sess(sizeof(struct sess), -2, handle_launchpad, NULL);
 	signal(SIGINT, int_handler);
 	signal(SIGTERM, int_handler);
 	signal(SIGHUP, hup_handler);
