@@ -745,7 +745,7 @@ static void print_buf(int x0, int y0, int cols, int cur,
             if(bytesperchar==1) 
                 cc = buf[i];
             else cc = buf16[i];
-            bg = (bg & 0x38) >> 2; /* background color */
+            bg = (bg & 0x38) >> 2 | (bg & 0x07); /* background color */
 
             bg = bg | (bg << 4);
             bg &= 0x77;
