@@ -1,3 +1,9 @@
+This is a terminal for kindle based on http://my.svgalib.org/kindle/myts-8.zip. It
+contains various fixes and preferences so that it is convenient to use as a
+primary display device.
+
+Original README follows:
+
 myts -- A kindle based terminal
 Matan Ziv-Av (matan@svgalib.org)
 
