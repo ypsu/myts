@@ -45,8 +45,8 @@
 #include <errno.h>
 #include <ctype.h>      /* isalnum */
 
-#define KMAX	256	/* keyboard queue */
-#define SMAX	256	/* screen queue */
+#define KMAX	1024	/* keyboard queue */
+#define SMAX	1024	/* screen queue */
 
 #define BYTES bytesperchar
 
