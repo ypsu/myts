@@ -345,7 +345,14 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 			a1 = sh->rows;
 		else if (a1 < 1)
 			a1 = 1;
-        if(sh->originmode) a1+=sh->scroll_top;
+		if(sh->originmode) {
+			a1+=sh->scroll_top;
+		} else {
+			if (a1 < sh->scroll_top || a1 >= sh->scroll_bottom) {
+				sh->scroll_top = 0;
+				sh->scroll_bottom = sh->rows;
+			}
+		}
 		if (a2 > sh->cols)
 			a2 = sh->cols;
 		else if (a2 < 1)
