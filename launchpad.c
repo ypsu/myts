@@ -747,8 +747,8 @@ static void print_buf(int x0, int y0, int cols, int cur,
             else cc = buf16[i];
             bg = (bg & 0x38) >> 2 | (bg & 0x07); /* background color */
 
+            bg = (bg | (bg >> 1)) & 0x7; // Decrease intensity.
             bg = bg | (bg << 4);
-            bg &= 0x77;
             if ( i == cur )
                 bg |= 0x88;
             get_char_pixmap(lps->fb->font, cc, &char_pixmap) ;
