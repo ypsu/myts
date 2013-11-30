@@ -936,9 +936,9 @@ struct sess *term_new(char *cmd, const char *name,
 	struct winsize ws;
 	struct my_sess *s;
 
-	if (rows < 4 || rows > 80)
+	if (rows < 4 || rows > 160)
 		rows = 25;
-	if (cols < 10 || cols > 160)
+	if (cols < 10 || cols > 320)
 		cols = 80;
 	l = rows*cols;
     
