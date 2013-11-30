@@ -560,7 +560,7 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 		if (curcol + a1 < sh->cols) {
 			char *dst = sh->page + sh->cur*BYTES;
 			int l = sh->cols - curcol - a1;
-			memcpy(dst, dst + a1, l*BYTES);
+			memcpy(dst, dst + a1*BYTES, l*BYTES);
 			dst = sh->attributes + sh->cur;
 			memcpy(dst, dst + a1, l); /* attributes */
 			erase(sh, sh->cur + l, a1);
