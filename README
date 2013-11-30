@@ -2,6 +2,10 @@ This is a terminal for kindle based on http://my.svgalib.org/kindle/myts-8.zip.
 It contains various fixes and preferences so that it is convenient to use as a
 primary display device.
 
+This fork uses statically linked musl as libc. This way the development is very
+easy: just compile it on a raspberry pi and then copy the resulting binary to
+the device.
+
 Original README follows:
 
 myts -- A kindle based terminal
