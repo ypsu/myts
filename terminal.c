@@ -669,7 +669,7 @@ static char *page_append(struct my_sess *sh, char *s)
             c=utf8_to_ucs2((const unsigned char *)s, (const unsigned char **)&ns);
             if(c<0){
                 // Handle the potential split UTF-8 code at the end of the input buffer.
-                if (sh->sbuf+SMAX-16 < s) {
+                if (sh->sbuf+8 < s) {
                         break;
                 }
                 c=0xfffd;
