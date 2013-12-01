@@ -287,6 +287,18 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 	    DBG(0, "ANSI sequence (%d)(%d) %d %d %d cmd %d( ESC-[%.*s)\n",
 		n, mark, a1, a2, a3, cmd, (parm+1 - base), base);	
 	switch (cmd) {
+	case '@': // insert character
+		{
+			if (curcol + a1 > sh->cols)
+				a1 = sh->cols - curcol;
+			char *dst = sh->page + (sh->cur+a1)*BYTES;
+			int l = sh->cols - curcol - a1;
+			memmove(dst, dst - a1*BYTES, l*BYTES);
+			dst = sh->attributes + sh->cur;
+			memmove(dst, dst - a1, l); /* attributes */
+			erase(sh, sh->cur, a1);
+		}
+		break;
 	case 'A': // up, hang at curcol
         if(a1==0)a1=1;
 		sh->cur -= sh->cols * a1;
