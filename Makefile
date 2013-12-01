@@ -10,7 +10,7 @@ STRIP=true
 CFLAGS = -static -g -Wall -Werror 
 CFLAGS += -nostdinc -isystem ~/proj/oss/musl-0.9.14/include/ -isystem /usr/include
 # files to publish
-PUB= $(HEADERS) $(ALLSRCS) Makefile README myts.arm myts.ini keydefs.ini $(TABLES)
+PUB= $(HEADERS) $(ALLSRCS) Makefile README myts myts.ini keydefs.ini $(TABLES)
 
 CODEPAGES = CP437 CP1255
 TABLES = $(patsubst %,%.table,$(CODEPAGES))
@@ -29,8 +29,8 @@ LDFLAGS += -nostdlib -L ~/proj/oss/musl-0.9.14/lib -lutil -lc -lgcc -lgcc_eh -lc
 
 OBJS := $(strip $(patsubst %.c,%.o,$(strip $(SRCS))))
 
-myts.arm: $(OBJS)
-	$(CC) $(CFLAGS) -o myts.arm $(OBJS) $(LDFLAGS)
+myts: $(OBJS)
+	$(CC) $(CFLAGS) -o myts $(OBJS) $(LDFLAGS)
 	$(STRIP) $@
 
 $(OBJS): myts.h
@@ -45,12 +45,12 @@ myts.zip: $(PUB)
 	mkdir -p launchpad
 	cp myts.l.ini launchpad/
 	cp profile myts.sh myts.ini *.hex *.table README keymap keydefs.ini bdf2hex about.txt myts/
-	cp myts.arm myts/myts
+	cp myts myts/myts
 	zip -r myts.zip launchpad myts
 	rm -r myts/ launchpad/
 
 clean:
-	rm -rf *lll myts.arm *.o *.core *.table myts.zip
+	rm -rf *lll myts *.o *.core *.table myts.zip
 
 # conversion
 # hexdump -e '"\n\t" 8/1 "%3d, "'
