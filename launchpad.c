@@ -648,27 +648,6 @@ static void process_term(struct input_event *ev, int mode)
                     strcpy(k, "\e[Z"); // backtab
             }
 		} 
-        else if (lang || langlock) {
-			/* translate. The first row in the table contains
-			 * the base characters, and the other
-			 * two are the mappings with SYM and SYM-SHIFT
-			 */
-			const char *t[] = { "qwertyuiopasdfghjklDzxcvbnm."};
-			char *p;
-			if (e->namelen == 1)
-				k[0] = e->name[0];
-			else if (E_IS(e, "Del"))
-				k[0] = 'D';
-			p = index(t[0], k[0]);
-			if ((p != NULL) && (p-t[0]<=27)) {
-                if(bytesperchar==1) {
-                    k[0]=langsymbols[p - t[0]];
-fprintf(stderr,"%i\n", k[0]);
-                } else {
-                    memcpy(k, langsymbols16[p-t[0]], langsymbols16[p-t[0]+1]-langsymbols16[p-t[0]]);
-                }
-            }
-		} 
         if(!k[0]) {
         if (e->namelen == 1) {
 			k[0] = e->name[0];
@@ -682,6 +661,11 @@ fprintf(stderr,"%i\n", k[0]);
 					k[0] = ")!@#$%^&*("[k[0] - '0'];
 				else if (ctrl)
 					k[0] += 1 - 'a';
+			}
+			if (lang || langlock) {
+				// Generate alt+key.
+				k[1] = k[0];
+				k[0] = '\e';
 			}
 		} else if (E_IS(e, "Enter"))
 			k[0] = 13;
