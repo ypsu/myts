@@ -332,10 +332,6 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 	case 'd':	/* vertical position absolute */
 		if (a1 >= sh->rows)
 			a1 = sh->rows;
-		if (a1 < sh->scroll_top || a1 >= sh->scroll_bottom) {
-			sh->scroll_top = 0;
-			sh->scroll_bottom = sh->rows;
-		}
 		sh->cur = (a1 - 1)*sh->cols + curcol;
 		B();
 //        sh->kflags &= ~kf_wrapped;
@@ -357,14 +353,7 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 			a1 = sh->rows;
 		else if (a1 < 1)
 			a1 = 1;
-		if(sh->originmode) {
-			a1+=sh->scroll_top;
-		} else {
-			if (a1 < sh->scroll_top || a1 >= sh->scroll_bottom) {
-				sh->scroll_top = 0;
-				sh->scroll_bottom = sh->rows;
-			}
-		}
+        if(sh->originmode) a1+=sh->scroll_top;
 		if (a2 > sh->cols)
 			a2 = sh->cols;
 		else if (a2 < 1)
@@ -783,7 +772,7 @@ static char *page_append(struct my_sess *sh, char *s)
                             DBG(1," \\n: cur=%i\n", sh->cur);
                             sh->cur += sh->cols;
                         }
-                        while (sh->cur >= sh->scroll_bottom * sh->cols) {
+                        while (sh->originmode && sh->cur >= sh->scroll_bottom * sh->cols) {
                             sh->cur -= sh->cols;
                             B();
 DBG(0, "auto Scrolling\n");
@@ -828,7 +817,7 @@ DBG(0, "auto Scrolling\n");
                         sh->cur += sh->cols;
                     }
                 }
-                while (sh->cur >= sh->scroll_bottom * sh->cols) {
+                while (sh->originmode && sh->cur >= sh->scroll_bottom * sh->cols) {
                     sh->cur -= sh->cols;
                     B();
 DBG(0, "auto Scrolling\n");
