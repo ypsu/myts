@@ -6,6 +6,10 @@ This fork uses statically linked musl as libc. This way the development is very
 easy: just compile it on a raspberry pi and then copy the resulting binary to
 the device.
 
+The tree also contains a prebuilt binary so you don't need to compile it
+yourself if you don't want to hack the code.
+
+
 Original README follows:
 
 myts -- A kindle based terminal
