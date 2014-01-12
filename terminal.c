@@ -772,9 +772,12 @@ static char *page_append(struct my_sess *sh, char *s)
                             DBG(1," \\n: cur=%i\n", sh->cur);
                             sh->cur += sh->cols;
                         }
-                        while (sh->originmode && sh->cur >= sh->scroll_bottom * sh->cols) {
+                        while (sh->cur >= sh->scroll_bottom * sh->cols) {
                             sh->cur -= sh->cols;
+                            int tmp = sh->originmode;
+                            sh->originmode = 1;
                             B();
+                            sh->originmode = tmp;
 DBG(0, "auto Scrolling\n");
                             page_scroll(sh);
                         }
@@ -817,9 +820,12 @@ DBG(0, "auto Scrolling\n");
                         sh->cur += sh->cols;
                     }
                 }
-                while (sh->originmode && sh->cur >= sh->scroll_bottom * sh->cols) {
+                while (sh->cur >= sh->scroll_bottom * sh->cols) {
                     sh->cur -= sh->cols;
+                    int tmp = sh->originmode;
+                    sh->originmode = 1;
                     B();
+                    sh->originmode = tmp;
 DBG(0, "auto Scrolling\n");
                     page_scroll(sh);
                 }
