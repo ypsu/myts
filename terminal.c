@@ -332,6 +332,11 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 	case 'd':	/* vertical position absolute */
 		if (a1 >= sh->rows)
 			a1 = sh->rows;
+		int y = a1 - 1;
+		if (y < sh->scroll_top || y >= sh->scroll_bottom) {
+			sh->scroll_top = 0;
+			sh->scroll_bottom = sh->rows;
+		}
 		sh->cur = (a1 - 1)*sh->cols + curcol;
 		B();
 //        sh->kflags &= ~kf_wrapped;
@@ -353,7 +358,15 @@ static int do_csi(struct my_sess *sh, char **s, int curcol)
 			a1 = sh->rows;
 		else if (a1 < 1)
 			a1 = 1;
-        if(sh->originmode) a1+=sh->scroll_top;
+		if(sh->originmode) {
+			a1+=sh->scroll_top;
+		} else {
+			int y = a1 - 1;
+			if (y < sh->scroll_top || y >= sh->scroll_bottom) {
+				sh->scroll_top = 0;
+				sh->scroll_bottom = sh->rows;
+			}
+		}
 		if (a2 > sh->cols)
 			a2 = sh->cols;
 		else if (a2 < 1)
