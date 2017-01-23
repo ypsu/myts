@@ -1,14 +1,9 @@
-# $Id: Makefile 8169 2011-01-07 17:32:36Z luigi $
+# Compile this on an old armv6 raspberry pi.
 
-#CC=arm-linux-gnueabi-gcc
-#CC=/opt/toolchains/arm-2009q3/bin/arm-none-linux-gnueabi-gcc
-CC=gcc
-#STRIP=arm-linux-gnueabi-strip
-#STRIP=strip
-STRIP=true
-CFLAGS = -static -Os -Wall -Werror 
-#CFLAGS = -static -g -Wall -Werror 
-CFLAGS += -nostdinc -isystem ~/proj/oss/musl-0.9.14/include/ -isystem /usr/include
+CC=musl-gcc
+STRIP=strip
+CFLAGS = -static -Os -Wall -Werror
+CFLAGS += -isystem /usr/lib/musl/include -isystem /usr/include
 # files to publish
 PUB= $(HEADERS) $(ALLSRCS) Makefile README myts myts.ini keydefs.ini $(TABLES)
 
@@ -24,8 +19,6 @@ SRCS= $(ALLSRCS)
 CFLAGS += -I.
 
 CFLAGS += -DNODEBUG
-LDFLAGS = ~/proj/oss/musl-0.9.14/crt/crt1.o
-LDFLAGS += -nostdlib -L ~/proj/oss/musl-0.9.14/lib -lutil -lc -lgcc -lgcc_eh -lc
 
 OBJS := $(strip $(patsubst %.c,%.o,$(strip $(SRCS))))
 
